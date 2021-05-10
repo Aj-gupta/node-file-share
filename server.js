@@ -34,7 +34,7 @@ app.use(express.static('public'));
 
 app.use(express.json());
 
-const __dirname = path.resolve()
+const __dirname = path.resolve();
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
