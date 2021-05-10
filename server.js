@@ -1,6 +1,5 @@
 import express from 'express'
 import path from 'path';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import {notFound, errorHandler } from './middleware/errorMiddleware.js';
@@ -13,24 +12,11 @@ import indexRouter from './routes/index.js';
 dotenv.config();
 connectDB();
 
-// Cors 
-const corsOptions = {
-  origin: process.env.ALLOWED_CLIENTS.split(',')
-  // ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:3300']
-}
-
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-// Default configuration looks like
-// {
-//     "origin": "*",
-//     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     "preflightContinue": false,
-//     "optionsSuccessStatus": 204
-//   }
+
 const __dirname = path.resolve();
-app.use(cors(corsOptions))
 app.use(express.static(path.join(__dirname,"public")));
 
 app.use(express.json());
