@@ -8,6 +8,7 @@ import {notFound, errorHandler } from './middleware/errorMiddleware.js';
 import filesRouter from './routes/files.js';
 import downloadRouter from './routes/download.js';
 import showRouter from './routes/show.js';
+import indexRouter from './routes/index.js';
 
 dotenv.config();
 connectDB();
@@ -28,17 +29,18 @@ const app = express();
 //     "preflightContinue": false,
 //     "optionsSuccessStatus": 204
 //   }
-
+const __dirname = path.resolve();
 app.use(cors(corsOptions))
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,"public")));
 
 app.use(express.json());
 
-const __dirname = path.resolve();
+
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
 // Routes 
+app.use('/',indexRouter);
 app.use('/api/files', filesRouter);
 app.use('/files', showRouter);
 app.use('/files/download', downloadRouter);
