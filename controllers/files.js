@@ -56,7 +56,7 @@ const send = asyncHandler(async (req, res) => {
      const sending = sendMail({
         from: emailFrom,
         to: emailTo,
-        subject: 'inShare file sharing',
+        subject: 'File-Share file sharing',
         text: `${emailFrom} shared a file with you.`,
         html: emailTemplate({
                   emailFrom, 
