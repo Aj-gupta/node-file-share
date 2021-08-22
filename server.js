@@ -12,6 +12,8 @@ import indexRouter from './routes/index.js';
 dotenv.config();
 connectDB();
 
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 
