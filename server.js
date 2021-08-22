@@ -10,12 +10,6 @@ import showRouter from './routes/show.js';
 import indexRouter from './routes/index.js';
 
 
-var forceSsl = function (req, res, next) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-        return res.redirect(['https://', req.get('Host'), req.url].join(''));
-    }
-    return next();
-};
 
 dotenv.config();
 connectDB();
@@ -23,6 +17,15 @@ connectDB();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+app.all('*', (req, res, next) =>{
+  if(req.secure) {
+    return next();
+  }
+  else {
+    res.redirect(307, 'https://'+ req.hostname + ":" + PORT + req.url);
+  }
+})
 
 
 const __dirname = path.resolve();
