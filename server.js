@@ -9,7 +9,7 @@ import downloadRouter from './routes/download.js';
 import showRouter from './routes/show.js';
 import indexRouter from './routes/index.js';
 
-env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'development';
 
 var forceSsl = function (req, res, next) {
     if (req.headers['x-forwarded-proto'] !== 'https') {
