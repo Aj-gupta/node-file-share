@@ -24,13 +24,10 @@ connectDB();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-app.configure(function () {      
-    if (env === 'production') {
-        app.use(forceSsl);
-    }
 
-    // other configurations etc for express go here...
-})
+if(env === 'production') {
+        app.use(forceSsl);
+}
 
 
 const __dirname = path.resolve();
