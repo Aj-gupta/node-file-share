@@ -9,13 +9,28 @@ import downloadRouter from './routes/download.js';
 import showRouter from './routes/show.js';
 import indexRouter from './routes/index.js';
 
+env = process.env.NODE_ENV || 'development';
+
+var forceSsl = function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+    return next();
+};
+
 dotenv.config();
 connectDB();
 
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+app.configure(function () {      
+    if (env === 'production') {
+        app.use(forceSsl);
+    }
+
+    // other configurations etc for express go here...
+})
 
 
 const __dirname = path.resolve();
