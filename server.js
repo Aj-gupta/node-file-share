@@ -23,7 +23,7 @@ app.all('*', (req, res, next) =>{
     return next();
   }
   else {
-    res.redirect(307, 'https://'+ req.hostname + ":" + PORT + req.url);
+    res.redirect('https://'+ req.hostname + ":" + PORT + req.url);
   }
 })
 
