@@ -9,7 +9,6 @@ import downloadRouter from './routes/download.js';
 import showRouter from './routes/show.js';
 import indexRouter from './routes/index.js';
 
-const env = process.env.NODE_ENV || 'development';
 
 var forceSsl = function (req, res, next) {
     if (req.headers['x-forwarded-proto'] !== 'https') {
@@ -24,10 +23,6 @@ connectDB();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-
-if(env === 'production') {
-        app.use(forceSsl);
-}
 
 
 const __dirname = path.resolve();
