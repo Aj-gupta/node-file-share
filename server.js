@@ -18,14 +18,6 @@ connectDB();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-app.all('*', (req, res, next) =>{
-  if(req.secure) {
-    return next();
-  }
-  else {
-    res.redirect('https://'+ req.hostname + ":" + PORT + req.url);
-  }
-})
 
 
 const __dirname = path.resolve();
