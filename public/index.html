@@ -8,9 +8,9 @@
     <title>FileShare - File Sharing Made Easy</title>
     <link rel="stylesheet" href="/css/indexStyle.css">
 	<script>
-		var host = "www.myfile-share.herokuapp.com" || "myfile-share.herokuapp.com";
-		if ((host == window.location.host) && (window.location.protocol != "https:")){
-					window.location.protocol = "https";
+		var host = "www.myfile-share.herokuapp.com";
+		if ((window.location.host == "myfile-share.herokuapp.com" || window.location.host == "www.myfile-share.herokuapp.com" ) && (window.location.protocol != "https:")){
+					window.location.protocol = "https:";
 		}
 	</script>
 </head>
