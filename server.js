@@ -9,15 +9,11 @@ import downloadRouter from './routes/download.js';
 import showRouter from './routes/show.js';
 import indexRouter from './routes/index.js';
 
-
-
 dotenv.config();
 connectDB();
 
-
 const PORT = process.env.PORT || 3000;
 const app = express();
-
 
 
 const __dirname = path.resolve();

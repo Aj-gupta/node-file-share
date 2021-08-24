@@ -44,16 +44,7 @@ const send = asyncHandler(async (req, res) => {
       if(file.sender) {
         return res.status(422).send({ error: 'Email already sent once.'});
       }
-      file.sender = emailFrom;
-      file.receiver = emailTo;
-      const response = await file.save();
-
-      if(!response){
-        res.status(400)
-        throw new Error('Invalid user data');
-      }
-      // send mail
-     const sending = sendMail({
+      const sending =await sendMail({
         from: emailFrom,
         to: emailTo,
         subject: 'File-Share file sharing',
@@ -65,10 +56,20 @@ const send = asyncHandler(async (req, res) => {
                   expires: '24 hours'
               })
       })
-      if(!sending){
+      if(sending.result === 'error'){
         res.status(404);
         throw new Error('Mail not send');
       }
+      file.sender = emailFrom;
+      file.receiver = emailTo;
+      const response = await file.save();
+
+      if(!response){
+        res.status(400)
+        throw new Error('Invalid user data');
+      }
+      // send mail
+    
       return res.json({success: true});
   
   });

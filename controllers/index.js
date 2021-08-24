@@ -1,5 +1,4 @@
 const indexController = (req, res)=>{
-    
     res.sendFile('index.html');
 }
 
